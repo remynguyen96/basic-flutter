@@ -1,91 +1,67 @@
+import 'package:first_app/Counter/counter_presenter.dart';
+import 'package:first_app/Counter/counter_view.dart';
 import 'package:flutter/material.dart';
-//import 'package:first_app/course1/first.dart';
-//import 'package:first_app/course1/second.dart';
-//import 'package:first_app/course1/third.dart';
-//import 'package:first_app/course1/fouth.dart';
-//import 'package:first_app/course1/fifth.dart';
-//import 'package:first_app/course1/sixth.dart';
-//import 'package:first_app/navigation/art_route.dart';
-import 'package:first_app/navigation/art_util.dart';
-import 'stateful.dart';
 
-class MyApp extends StatelessWidget {
-  DefaultTabController _firstHomepage() {
-    return DefaultTabController(
-      length: 3,
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text('Navigation Art'),
-          bottom: TabBar(
-            tabs: <Widget>[
-              Tab(
-                icon: Icon(Icons.art_track),
-                text: ArtUtil.VANGOSH,
-              ),
-              Tab(
-                icon: Icon(Icons.art_track),
-                text: ArtUtil.CARAVAGGIO,
-              ),
-              Tab(
-                icon: Icon(Icons.art_track),
-                text: ArtUtil.MONET,
-              ),
-            ],
+class CounterWidget extends StatefulWidget {
+  @override
+  _CounterWidgetState createState() => _CounterWidgetState();
+}
+
+class _CounterWidgetState extends State<CounterWidget> implements CounterView {
+  int count = 0;
+  CounterPresenter presenter;
+
+  _CounterWidgetState() {
+    presenter = CounterPresenter();
+    presenter.attachView(this);
+  }
+
+//  @override
+//  void dispose() {
+//    super.dispose();
+//    if (presenter != null) {
+//      presenter.deAttachView();
+//    }
+//  }
+//  @override
+//  void onDecrement(int value) {
+//    setState(() {
+//      count = value;
+//    });
+//  }
+//  @override
+//  void onIncrement(int value) {
+//    setState(() {
+//      count = value;
+//    });
+//  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          RaisedButton(
+            onPressed: () {
+              presenter.increment();
+            },
+            child: Text('Increase'),
           ),
-        ),
-        body: TabBarView(
-          children: <Widget>[
-            Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(ArtUtil.IMG_VANGOSH),
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
-            Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(ArtUtil.IMG_CARAVAGGIO),
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
-            Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(ArtUtil.IMG_MONET),
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
-          ],
-        ),
+          Text('Count: $count'),
+          RaisedButton(
+            onPressed: () {
+              presenter.decrement();
+            },
+            child: Text('Decrease'),
+          ),
+        ],
       ),
     );
   }
+}
 
-  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-  final SnackBar snackBar = const SnackBar(content: Text('Showing Snackbar'));
-
-  void openPage(BuildContext context) {
-    Navigator.push(context, MaterialPageRoute(
-      builder: (BuildContext context) {
-        return Scaffold(
-          appBar: AppBar(
-            title: const Text('Next page'),
-          ),
-          body: const Center(
-            child: Text(
-              'This is the next page',
-              style: TextStyle(fontSize: 24),
-            ),
-          ),
-        );
-      },
-    ));
-  }
-
+class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -102,52 +78,11 @@ class MyApp extends StatelessWidget {
           body1: TextStyle(fontSize: 16),
         ),
       ),
-//      home: ArtRoute(art: ArtUtil.IMG_CARAVAGGIO),
       home: Scaffold(
-        key: scaffoldKey,
         appBar: AppBar(
           title: Text('Settings Dashboard'),
-          actions: <Widget>[
-            IconButton(
-              onPressed: () {
-                scaffoldKey.currentState.showSnackBar(snackBar);
-              },
-              icon: const Icon(Icons.add_alert),
-              tooltip: 'Show Snackbar',
-            ),
-            IconButton(
-              icon: const Icon(Icons.navigate_next),
-              tooltip: 'Next page',
-              onPressed: () {
-                openPage(context);
-              },
-            ),
-          ],
         ),
-//        body: SixthCourse(),
-//        body: FifthCourse(),
-//        body: FouthCourse(),
-//        body: ThirdCourse(),
-//        body: SecondCourse(),
-//        body: FirstCourse(),
-//        body: ParentWidget(),
-        body: TapboxA(),
-
-//        floatingActionButton: FloatingActionButton(
-//          child: Icon(Icons.lightbulb_outline),
-//          onPressed: () {},
-//        ),
-
-//        persistentFooterButtons: <Widget>[
-//          IconButton(
-//            onPressed: () {},
-//            icon: Icon(Icons.add_location),
-//          ),
-//          IconButton(
-//            onPressed: () {},
-//            icon: Icon(Icons.add_alarm),
-//          ),
-//        ],
+        body: CounterWidget(),
       ),
     );
   }
