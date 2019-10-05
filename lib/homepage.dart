@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 //import 'navigation/FirstStep.dart';
 //import 'navigation/NavigateParams.dart';
 //import 'navigation/NavigationData.dart';
-import 'navigation/NavigationData2.dart';
+//import 'navigation/NavigationData2.dart';
+
+//import 'data/fetchBasic.dart';
+import 'data/fetchBackground.dart';
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
