@@ -7,7 +7,11 @@ import 'package:flutter/material.dart';
 //import 'navigation/NavigationData2.dart';
 
 //import 'data/fetchBasic.dart';
-import 'data/fetchBackground.dart';
+//import 'data/fetchBackground.dart';
+
+//import 'images/fading-images.dart';
+
+import 'ListView/different-types.dart';
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -30,7 +34,7 @@ class MyApp extends StatelessWidget {
       /// General Navigation
 //      initialRoute: '/',
 //      routes: {
-//        '/': (context) => FirstStep(),
+//        '/': (context) => HomeScreen(),
 //        '/second': (context) => SecondStep(),
 //      },
 
@@ -51,8 +55,7 @@ class MyApp extends StatelessWidget {
 //      },
 
       home: HomeScreen(),
-
-//      home: FirstStep(),
+//      home: FadingImages(),
 //      home: LoginPage(),
     );
   }
