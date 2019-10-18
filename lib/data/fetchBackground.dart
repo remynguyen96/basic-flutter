@@ -26,8 +26,9 @@ List<Photo> parsePhotos(String responseBody) {
   return parsed.map<Photo>((json) => Photo.fromJson(json)).toList();
 }
 
-Future<List<Photo>> fetchPhotos(http.Client client) async {
-  final repsonse = await client.get('http://jsonplaceholder.typicode.com/photos?_limit=10');
+//Future<List<Photo>> fetchPhotos(http.Client client) async {
+Future<List<Photo>> fetchPhotos() async {
+  final repsonse = await http.Client().get('http://jsonplaceholder.typicode.com/photos?_limit=10');
 
 //  return parsePhotos(repsonse.body);
   return compute(parsePhotos, repsonse.body);
@@ -56,7 +57,7 @@ class AppFetchData extends StatelessWidget {
         title: Text('Isolate Demo'),
       ),
       body: FutureBuilder<List<Photo>>(
-        future: fetchPhotos(http.Client()),
+        future: fetchPhotos(),
         builder: (context, snapshot) {
           if (snapshot.hasError) print(snapshot.error);
 

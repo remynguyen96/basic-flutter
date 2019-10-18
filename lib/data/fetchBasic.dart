@@ -1,9 +1,16 @@
 import 'dart:convert';
-import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+
+class HomeScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: AppFetchData(post: fetchPost()),
+    );
+  }
+}
 
 class Post {
   final int userId;
@@ -11,7 +18,7 @@ class Post {
   final String title;
   final String body;
 
-  Post({this.userId, this.id, this.title, this.body});
+  Post({this.userId, @required this.id, this.title, this.body});
 
   factory Post.fromJson(Map<String, dynamic> json) {
     return Post(
@@ -56,19 +63,24 @@ class AppFetchData extends StatelessWidget {
       ),
       body: Center(
         child: FutureBuilder<Post>(
+          initialData: Post(body: 'body', title: 'title', id: 44, userId: 44),
           future: post,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              return Column(
-                children: <Widget>[
-                  Text(snapshot.data.id.toString()),
-                  SizedBox(height: 20),
-                  Text(snapshot.data.userId.toString()),
-                  SizedBox(height: 20),
-                  Text(snapshot.data.title),
-                  SizedBox(height: 20),
-                  Text(snapshot.data.body),
-                ],
+              return Padding(
+                padding: const EdgeInsets.all(24.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text('ID ---- ${snapshot.data.id.toString()}'),
+                    SizedBox(height: 20),
+                    Text('UserID ---- ${snapshot.data.userId.toString()}'),
+                    SizedBox(height: 20),
+                    Text('Title ---- ${snapshot.data.title}'),
+                    SizedBox(height: 20),
+                    Text('Body ---- ${snapshot.data.body}'),
+                  ],
+                ),
               );
             } else {
               return Text("${snapshot.error}");
@@ -78,15 +90,6 @@ class AppFetchData extends StatelessWidget {
           },
         ),
       ),
-    );
-  }
-}
-
-class HomeScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: AppFetchData(post: fetchPost()),
     );
   }
 }

@@ -20,6 +20,8 @@ class HomeScreen extends StatelessWidget {
                   MaterialPageRoute(
                     builder: (context) => ExtractArgumentsScreen(),
                     settings: RouteSettings(
+                      name: 'Extract Arguments Router',
+                      isInitialRoute: true,
                       arguments: ScreenArguments(
                         title: 'Extract Arguments Screen',
                         message: 'This message is extracted in the build method.',
@@ -55,13 +57,17 @@ class ExtractArgumentsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ScreenArguments args = ModalRoute.of(context).settings.arguments;
+    final String name = ModalRoute.of(context).settings.name;
 
     return Scaffold(
       appBar: AppBar(
         title: Text(args.title),
       ),
       body: Center(
-        child: Text(args.message),
+        child: Text(
+          '${args.message} \n $name',
+          style: TextStyle(height: 1.7),
+        ),
       ),
     );
   }
@@ -80,12 +86,17 @@ class PassArgumentsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final String name = ModalRoute.of(context).settings.name;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(title),
       ),
       body: Center(
-        child: Text(message),
+        child: Text(
+          '$message \n $name',
+          style: TextStyle(height: 1.7),
+        ),
       ),
     );
   }

@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:first_app/helper/validation.dart';
 import 'package:rxdart/rxdart.dart';
+import '../helper/validation.dart';
 
 class LoginViewModel {
   final _emailSubject = BehaviorSubject<String>();

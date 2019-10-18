@@ -13,6 +13,7 @@ class HomeScreen extends StatelessWidget {
           if (index % 6 == 0) {
             return HeadingItem(heading: "Heading $index");
           }
+
           return MessageItem(body: "Message body $index", sender: "Sender: $index");
         }),
       ),
@@ -36,7 +37,7 @@ class MessageItem implements ListItem {
 }
 
 class ListViewCourse extends StatelessWidget {
-  List<ListItem> items;
+  final List<ListItem> items;
 
   ListViewCourse({Key key, @required this.items}) : super(key: key);
 
@@ -50,12 +51,12 @@ class ListViewCourse extends StatelessWidget {
           style: Theme.of(context).textTheme.headline,
         ),
       );
-    } else if (item is MessageItem) {
-      return ListTile(
-        title: Text(item.sender),
-        subtitle: Text(item.body),
-      );
     }
+
+    return ListTile(
+      title: Text(item.sender),
+      subtitle: Text(item.body),
+    );
   }
 
   @override

@@ -7,11 +7,15 @@ import 'package:flutter/material.dart';
 //import 'navigation/NavigationData2.dart';
 
 //import 'data/fetchBasic.dart';
-//import 'data/fetchBackground.dart';
+import 'data/fetchBackground.dart';
+
+//import 'notification/First.dart';
+//import 'notification/pageView.dart';
+//import 'notification/preferences.dart';
 
 //import 'images/fading-images.dart';
 
-import 'ListView/different-types.dart';
+//import 'ListView/different-types.dart';
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -44,6 +48,9 @@ class MyApp extends StatelessWidget {
 //          final ScreenArguments args = settings.arguments;
 //
 //          return MaterialPageRoute(
+//            settings: RouteSettings(
+//              name: 'Text PassArgumentsScreen',
+//            ),
 //            builder: (context) => PassArgumentsScreen(
 //              title: args.title,
 //              message: args.message,
