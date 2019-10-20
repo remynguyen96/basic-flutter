@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'states/basic.dart';
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -21,8 +22,10 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: Text('Simple State Management'),
         ),
-        body: Container(),
+        body: HomepageApplication(),
       ),
     );
   }
 }
+
+//https://github.com/flutter/flutter/issues/25370#issuecomment-540947710
