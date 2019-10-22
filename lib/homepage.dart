@@ -1,28 +1,32 @@
 import 'package:flutter/material.dart';
-import 'states/basic.dart';
+import 'package:provider/provider.dart';
+import 'common/theme.dart';
+import 'screen/cart.dart';
+import 'screen/catalog.dart';
+import 'models/cart.dart';
+import 'models/catalog.dart';
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'State Management',
-      theme: ThemeData(
-        brightness: Brightness.dark,
-        primaryColor: Color(0xff388E3C),
-        accentColor: Color(0xff536DFE),
-        primarySwatch: Colors.blue,
-        fontFamily: 'SF-Pro-Text-Regular',
-        textTheme: TextTheme(
-          body1: TextStyle(fontSize: 16),
+    return MultiProvider(
+      providers: [
+        Provider(
+          builder: (context) => CatalogModel(),
         ),
-      ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Simple State Management'),
+        ChangeNotifierProxyProvider<CatalogModel, CartModel>(
+          builder: (context, catalog, previousCart) => CartModel(catalog, previousCart),
         ),
-        body: HomepageApplication(),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'State Management',
+        theme: appTheme,
+        initialRoute: '/',
+        routes: {
+          '/': (context) => MyCatalog(),
+          '/cart': (context) => MyCart(),
+        },
       ),
     );
   }
