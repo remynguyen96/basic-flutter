@@ -8,7 +8,6 @@ class MyCart extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Cart', style: Theme.of(context).textTheme.display4),
-        backgroundColor: Colors.white,
       ),
       body: Container(
         color: Colors.yellow,
@@ -76,7 +75,7 @@ class _CartTotal extends StatelessWidget {
                 Scaffold.of(context).showSnackBar(SnackBar(content: Text('Buying not supported yet.')));
               },
               child: Text('Buy'),
-              color: Colors.white,
+              color: Colors.lightBlue[400],
             )
           ],
         ),
