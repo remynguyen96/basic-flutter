@@ -69,7 +69,7 @@ flutter:
            weight: 300
          - asset: fonts/SF-Pro-Text-Medium.otf
            weight: 700
-     - family: SVN-Manus
+     - family: SVN Manus
        fonts:
          - asset: fonts/SVN-Manus.otf
   #
